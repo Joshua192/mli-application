@@ -1,0 +1,13 @@
+opencv_python==4.11.0.86
+pandas==2.2.3
+psycopg2==2.9.10
+streamlit==1.44.1
+streamlit_drawable_canvas==0.9.3
+streamlit_js_eval==0.1.7
+# torch==2.6.0+cu124
+# torchvision==0.21.0+cu124
+# --extra-index-url https://download.pytorch.org/whl/cu124
+
+#cpu version used for deployed ver
+torch==2.6.0
+torchvision==0.21.0

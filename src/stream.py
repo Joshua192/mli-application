@@ -12,10 +12,12 @@ try:
                         host= 'localhost',
                         password = "post_admin",
                         port = 5432)
-    print("Database connected successfully.")
+    
+    # print("Database connected successfully.")
 except Exception as e:
-    print("Database connection failed.\n")
-    print(e)
+    st.write("Database connection failed.\n")
+    st.write(e)
+    raise
 
 st.header("Hand-drawn Number Recognition Model (MNIST)")
 

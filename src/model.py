@@ -1,5 +1,5 @@
 from torchvision import transforms
-# import numpy
+# from fastapi import FastAPI, Request 
 import cv2
 import torch
 import torch.nn as nn
@@ -8,7 +8,9 @@ import torch.nn.functional as F
 
 classifications = ('0','1','2','3','4','5','6','7','8','9')
 
-device = torch.device('cuda' if torch.cuda.is_available else 'cpu')
+# cuda is av on device but not in prod, forcing cpu
+# device = torch.device('cuda' if torch.cuda.is_available else 'cpu')
+device = torch.device(  'cpu') 
 
 class ConvNet(nn.ModuleList):
 
@@ -28,12 +30,13 @@ class ConvNet(nn.ModuleList):
         return self.softmax(inputs)
 
 
-model = ConvNet().to(device) #instance of class passed to GPU/CPU
+model = ConvNet().to(device) #passed to GPU/CPU
 
-model.load_state_dict(torch.load( "./saved_models/mid_train_model", weights_only = True))
+model.load_state_dict(torch.load( "./saved_models/mid_train_model", weights_only = True, map_location=torch.device('cpu')))
 model.eval()
 
 
+# @app.post("/predict")
 def predictor(picture) -> tuple:
     _ = image_processing(picture)
     return model_call(_)
