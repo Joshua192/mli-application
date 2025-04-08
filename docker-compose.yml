@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:17
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: post_admin
+      POSTGRES_DB: mnistdb
+    ports:
+      - "5432:5432"
+
+  app:
+    build: .
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: post_admin
+      DB_NAME: mnistdb
+    ports:
+      - "8501:8501"
+
+    volumes:
+      - ./src:/src
+
+volumes:
+  postgres_data:
