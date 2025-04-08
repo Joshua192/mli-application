@@ -14,15 +14,15 @@ with conn:
     with conn.cursor() as cur:
         
         try:
-            # cur.execute(
-            # """
-            # CREATE TABLE prediction_logs(
-            # prediction INTEGER NOT NULL, 
-            # confidence NUMERIC(3,2) NOT NULL, 
-            # groundTruth INTEGER NOT NULL,
-            # submissionStamp VARCHAR(20) NOT NULL 
-            # );
-            # """)
+            cur.execute(
+            """
+            CREATE TABLE prediction_logs(
+            prediction INTEGER NOT NULL, 
+            confidence NUMERIC(3,2) NOT NULL, 
+            groundTruth INTEGER NOT NULL,
+            submissionStamp VARCHAR(20) NOT NULL 
+            );
+            """)
 
             print("Table created successfully")
         except Exception as e:

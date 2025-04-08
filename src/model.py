@@ -32,7 +32,7 @@ class ConvNet(nn.ModuleList):
 
 model = ConvNet().to(device) #passed to GPU/CPU
 
-model.load_state_dict(torch.load( "./saved_models/mid_train_model", weights_only = True, map_location=torch.device('cpu')))
+model.load_state_dict(torch.load( "./saved_models/mid_train_model", map_location=torch.device('cpu')))
 model.eval()
 
 
@@ -45,7 +45,6 @@ def predictor(picture) -> tuple:
 def image_processing(picture):
     
     # picture = cv2.cvtColor(picture, cv2.COLOR_BGRA2BGR)
-
     
     if len(picture.shape) == 3:  # If the image has 3 channels (RGB)
         picture = cv2.cvtColor(picture, cv2.COLOR_RGB2GRAY)
@@ -55,13 +54,12 @@ def image_processing(picture):
     picture = transforms.functional.resize(picture, (28,28))
     # picture = picture / 255 #forgot to normalise...
     
-    print("Min:", picture.min().item(), "Max:", picture.max().item())
+    # print("Min:", picture.min().item(), "Max:", picture.max().item())
     
     picture = picture.unsqueeze(0).unsqueeze(0)
     
-    output = model(picture.to(device))
-    
-    print("Raw logits:", output)
+    # output = model(picture.to(device))
+    # print("Raw logits:", output)
 
     return picture
     
